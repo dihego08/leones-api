@@ -75,6 +75,9 @@ $app->configure('app');
 $app->middleware([
     App\Http\Middleware\CorsMiddleware::class
 ]);
+$app->middleware([
+    App\Http\Middleware\AuthMiddleware::class
+]);
 // $app->middleware([
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
@@ -83,6 +86,8 @@ $app->middleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+$app->configure('auth');
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
