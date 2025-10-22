@@ -49,3 +49,5 @@ $router->get('/', function () use ($router) {
     $router->post('estado-pago', 'EstadoPagoController@store');
     $router->put('estado-pago/{id}', 'EstadoPagoController@update');
     $router->delete('estado-pago/{id}', 'EstadoPagoController@destroy');
+$router->post('/login', 'AuthController@login');
+$router->get('/me', ['middleware' => 'auth', 'uses' => 'AuthController@me']);
