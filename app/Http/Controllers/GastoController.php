@@ -2,66 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pago;
+use App\Models\Gasto;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
-class PagoController extends Controller
+class GastoController extends Controller
 {
     public function index()
     {
-        return response()->json(Pago::with(['socio', 'concepto', 'estadoPago'])->get());
+        return response()->json(Gasto::with(['socio'])->get());
     }
 
     public function store(Request $request)
     {
-        $id = Pago::create([
+        $id = Gasto::create([
             'id_socio' => $request->input('id_socio'),
-            'id_concepto' => $request->input('id_concepto'),
-            'id_estado_pago' => $request->input('id_estado_pago'),
+            'concepto' => $request->input('concepto'),
             'monto' => $request->input('monto'),
-            'fecha_pago' => $request->input('fecha_pago'),
+            'fecha' => $request->input('fecha'),
+            'fecha_creacion' => Carbon::now()
         ]);
         return response()->json([
             'status' => 'success',
-            'message' => 'Pago creado correctamente',
+            'message' => 'Gasto creado correctamente',
             'id' => $id
         ], 200);
     }
 
     public function update(Request $request, $id)
     {
-        Pago::where('id', $id)
+        Gasto::where('id', $id)
             ->update([
                 'id_socio' => $request->input('id_socio'),
-                'id_concepto' => $request->input('id_concepto'),
-                'id_estado_pago' => $request->input('id_estado_pago'),
+                'concepto' => $request->input('concepto'),
                 'monto' => $request->input('monto'),
-                'fecha_pago' => $request->input('fecha_pago'),
-            ]);
-        
+                'fecha' => $request->input('fecha'),
+                'fecha_modificacion' => Carbon::now()
+            ]);        
         return response()->json([
             'status' => 'success',
-            'message' => 'Pago actualizado correctamente',
+            'message' => 'Gasto actualizado correctamente',
             'id' => $id
         ], 200);
     }
 
     public function destroy($id)
     {
-        $pago = Pago::find($id);
+        $gasto = Gasto::find($id);
 
-        if (!$pago) {
+        if (!$gasto) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Pago no encontrada o no se pudo eliminar'
+                'message' => 'Gasto no encontrada o no se pudo eliminar'
             ], 404);
         }
 
-        $pago->delete();
+        $gasto->delete();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Pago eliminado correctamente'   
+            'message' => 'Gasto eliminado correctamente'   
         ], 200);
     }
 }

@@ -51,3 +51,15 @@ $router->get('/', function () use ($router) {
     $router->delete('estado-pago/{id}', 'EstadoPagoController@destroy');
 $router->post('/login', 'AuthController@login');
 $router->get('/me', ['middleware' => 'auth', 'uses' => 'AuthController@me']);
+
+// GASTOS
+    $router->get('gastos', 'GastoController@index');
+    $router->post('gastos', 'GastoController@store');
+    $router->put('gastos/{id}', 'GastoController@update');
+    $router->delete('gastos/{id}', 'GastoController@destroy');
+
+    // TIPO MONEDA
+    $router->get('tipo_moneda', 'TipoMonedaController@index');
+    $router->post('tipo_moneda', 'TipoMonedaController@store');
+    $router->put('tipo_moneda/{id}', 'TipoMonedaController@update');
+    $router->delete('tipo_moneda/{id}', 'TipoMonedaController@destroy');

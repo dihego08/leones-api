@@ -9,7 +9,7 @@ class ConceptoController extends Controller
 {
     public function index()
     {
-        return response()->json(Concepto::with(['periodicidad'])->get());
+        return response()->json(Concepto::with(['periodicidad', 'tipo_moneda'])->get());
     }
 
     public function store(Request $request)
@@ -20,6 +20,7 @@ class ConceptoController extends Controller
             'monto' => $request->input('monto'),
             'id_periodicidad' => $request->input('id_periodicidad'),
             'estado' => $request->input('estado'),
+            'id_tipo_moneda' => $request->input('id_tipo_moneda'),
         ]);
         return response()->json([
             'status' => 'success',
@@ -56,6 +57,7 @@ class ConceptoController extends Controller
                 'monto' => $request->input('monto'),
                 'id_periodicidad' => $request->input('id_periodicidad'),
                 'estado' => $request->input('estado'),
+                'id_tipo_moneda' => $request->input('id_tipo_moneda'),
             ]);
         //return response()->json(['ok' => true]);
         

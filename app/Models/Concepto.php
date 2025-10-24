@@ -8,7 +8,7 @@ class Concepto extends Model
 {
     protected $table = 'conceptos';
     protected $fillable = [
-        'nombre', 'descripcion', 'monto', 'id_periodicidad', 'estado'
+        'nombre', 'descripcion', 'monto', 'id_periodicidad', 'estado', 'id_tipo_moneda'
     ];
 
     public function pagos()
@@ -18,5 +18,9 @@ class Concepto extends Model
     public function periodicidad()
     {
         return $this->belongsTo(Periodicidad::class, 'id_periodicidad');
+    }
+    public function tipo_moneda()
+    {
+        return $this->belongsTo(TipoMoneda::class, 'id_tipo_moneda');
     }
 }
