@@ -10,7 +10,7 @@ class GastoController extends Controller
 {
     public function index()
     {
-        return response()->json(Gasto::with(['socio'])->get());
+        return response()->json(Gasto::with(['socio', 'tipo_moneda'])->get());
     }
 
     public function store(Request $request)
@@ -19,7 +19,8 @@ class GastoController extends Controller
             'id_socio' => $request->input('id_socio'),
             'concepto' => $request->input('concepto'),
             'monto' => $request->input('monto'),
-            'fecha' => $request->input('fecha'),
+            'fecha' => date("Y-m-d", strtotime($request->input('fecha'))),
+            'id_tipo_moneda' => $request->input('id_tipo_moneda'),
             'fecha_creacion' => Carbon::now()
         ]);
         return response()->json([
@@ -36,7 +37,8 @@ class GastoController extends Controller
                 'id_socio' => $request->input('id_socio'),
                 'concepto' => $request->input('concepto'),
                 'monto' => $request->input('monto'),
-                'fecha' => $request->input('fecha'),
+                'fecha' => date("Y-m-d", strtotime($request->input('fecha'))),
+                'id_tipo_moneda' => $request->input('id_tipo_moneda'),
                 'fecha_modificacion' => Carbon::now()
             ]);        
         return response()->json([

@@ -23,4 +23,8 @@ class Concepto extends Model
     {
         return $this->belongsTo(TipoMoneda::class, 'id_tipo_moneda');
     }
+    public function meses()
+    {
+        return $this->hasMany(ConceptoMes::class, 'id_concepto');
+    }
 }

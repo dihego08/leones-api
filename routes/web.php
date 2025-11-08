@@ -63,3 +63,6 @@ $router->get('/me', ['middleware' => 'auth', 'uses' => 'AuthController@me']);
     $router->post('tipo_moneda', 'TipoMonedaController@store');
     $router->put('tipo_moneda/{id}', 'TipoMonedaController@update');
     $router->delete('tipo_moneda/{id}', 'TipoMonedaController@destroy');
+
+    // REPORTE
+    $router->post('reportes/socios_deudores_mes_actual', 'ReporteController@socios_deudores_mes_actual');
